@@ -1,17 +1,22 @@
-<navbar></navbar>
 <div ng-controller="MainCtrl">
     <div id="logo" class="text-center typography">
         <h1><i class="fa fa-angellist"></i> SeekDeer</h1>
     </div>
     <div class="col-md-4 typography">
         <accordion close-others="oneAtATime">
+        
             <filter-budget></filter-budget>
             <filter-where></filter-where>
+            <filter-when></filter-when>
+            
         </accordion>
     </div>
 </div>
 <!-- end accordion navigation-->
 <div class="col-md-8">
+	<ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+			<ui-gmap-markers models="map.markers" coords="'self'"  fit='true'></ui-gmap-markers>
+	</ui-gmap-google-map>
 </div>
 <!-- end google maps -->
 <div class="container">
@@ -33,4 +38,3 @@
         </p>
     </form>
 </div>
-<footer></footer>

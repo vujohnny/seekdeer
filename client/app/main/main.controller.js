@@ -36,9 +36,9 @@ angular.module('seekdeerApp')
             valueIcon: 'usd',
             defaultValue: '1000',
             slider: [{
-                min: "50",
-                max: "10000",
-                step: "50"
+                min: '50',
+                max: '10000',
+                step: '50'
             }]
         };
 
@@ -46,19 +46,71 @@ angular.module('seekdeerApp')
             groupTitle: 'Where',
             groupIcon: 'globe',
             defaultValue: {
-                "Tropical": true,
-                "Forrest": true
+                'Tropical': true,
+                'Forrest': true
             },
             categories: [{
-                name: "Tropical"
+                name: 'Tropical'
             }, {
-                name: "Snow"
+                name: 'Snow'
             }, {
-                name: "Rain"
+                name: 'Rain'
             }, {
-                name: "Forrest"
+                name: 'Forrest'
             }]
         };
+        
+        $scope.when = {
+            groupTitle: 'When',
+            groupIcon: 'calendar',
+            defaultValue: 'Today'
+        };
+        
+						// current date
+						$scope.today = function() {
+							$scope.dt = new Date();
+						};
+						$scope.today();
+						
+						// min date ***need this so user can't select days past
+						$scope.toggleMin = function() {
+							$scope.minDate = $scope.minDate ? null : new Date();
+						};
+						$scope.toggleMin();
+						
+						// max date
+						$scope.maxDate = new Date(2020, 5, 22);
+						
+						// google maps
+						$scope.map = { 
+							center: { latitude: 45, longitude: -73 }, 
+							zoom: 8,
+							options: {
+							    draggable: false,
+							    scrollwheel: false,
+							    disableDefaultUI: true,
+							    mapTypeId: google.maps.MapTypeId.TERRAIN
+							}
+						};
+						
+						$scope.map.markers = [
+						{
+							id : 1,
+							latitude: 43.67023,
+							longitude: -79.38676
+					    },
+					    {
+							id : 2,
+							latitude: 43.67023,
+							longitude: -81.38676
+					    },
+					    {
+							id : 3,
+							latitude: 43.67023,
+							longitude: -80.38676
+					    }
+					    ];
+					
 
         $scope.showSelected = function(input) {
           //console.log(input)

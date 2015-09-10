@@ -1,13 +1,15 @@
 <accordion-group is-open="status.third">
     
     <accordion-heading>
-        <div>
+        <div ng-class="{'orange': status.third, 'black': !status.third}">
             <i class="fa fa-{{when.groupIcon}}"></i> {{when.groupTitle}}
-            <i class="fa fa-{{when.valueIcon}}"></i> {{showSelected(when.defaultValue)}}
+            <i class="fa fa-{{when.valueIcon}}"></i> <!-- {{when.defaultValue}} --> {{dt | date:'MMMM yyyy' }}
             <i class="pull-right fa chevron-icon" ng-class="{'fa-chevron-down': status.third, 'fa-chevron-right': !status.third}"></i>
         </div>
     </accordion-heading>
     
-    <pre>When content here</pre>
-    
+	<div class="when-calendar">
+		<datepicker ng-model="dt" min-date="minDate" show-weeks="false" datepicker-mode="'month'" min-mode="'month'" max-mode="'month'"></datepicker>
+	</div>
+
 </accordion-group>

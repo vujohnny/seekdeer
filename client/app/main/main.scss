@@ -38,6 +38,14 @@ $medium-margin: 1.2em;
   margin: 0;
 }
 
+.orange {
+	color: $orange;
+}
+
+.black {
+	color: 000;
+}
+
 
 // site styles =====================================================================================================
 
@@ -53,4 +61,49 @@ $medium-margin: 1.2em;
     font-size: 1.5em;
   }
   
+}
+
+.panel-title {
+	
+	a {
+		text-decoration: none;
+	}
+	
+	&:hover {
+		
+		a {
+			text-decoration: none;
+			color: $orange;
+		}
+		
+	}
+	
+}
+
+// calendar styles
+.when-calendar {
+	width: 100%;
+	
+	table {
+		width: 100%;
+		
+		.btn-default[disabled], .btn-default {
+			border: 0;
+		}
+		
+		.btn-info.active {
+			background-color: $medium-grey;	
+		}
+		
+		.text-info {
+			color: $orange;
+		}
+		
+	}
+	
+}
+
+//google maps styles 
+.angular-google-map-container { 
+	height: 100vh; 
 }

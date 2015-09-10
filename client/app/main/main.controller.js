@@ -62,8 +62,26 @@ angular.module('seekdeerApp')
         
         $scope.when = {
             groupTitle: 'When',
-            groupIcon: 'calendar'
+            groupIcon: 'calendar',
+            defaultValue: 'Today'
         };
+        
+						// current date
+						$scope.today = function() {
+							$scope.dt = new Date();
+						};
+						$scope.today();
+						
+						// min date
+						$scope.toggleMin = function() {
+							$scope.minDate = $scope.minDate ? null : new Date();
+						};
+						$scope.toggleMin();
+						
+						// max date
+						$scope.maxDate = new Date(2020, 5, 22);
+	
+	
 
         $scope.showSelected = function(input) {
           //console.log(input)

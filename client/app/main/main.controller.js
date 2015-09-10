@@ -36,9 +36,9 @@ angular.module('seekdeerApp')
             valueIcon: 'usd',
             defaultValue: '1000',
             slider: [{
-                min: "50",
-                max: "10000",
-                step: "50"
+                min: '50',
+                max: '10000',
+                step: '50'
             }]
         };
 
@@ -46,18 +46,23 @@ angular.module('seekdeerApp')
             groupTitle: 'Where',
             groupIcon: 'globe',
             defaultValue: {
-                "Tropical": true,
-                "Forrest": true
+                'Tropical': true,
+                'Forrest': true
             },
             categories: [{
-                name: "Tropical"
+                name: 'Tropical'
             }, {
-                name: "Snow"
+                name: 'Snow'
             }, {
-                name: "Rain"
+                name: 'Rain'
             }, {
-                name: "Forrest"
+                name: 'Forrest'
             }]
+        };
+        
+        $scope.when = {
+            groupTitle: 'When',
+            groupIcon: 'calendar'
         };
 
         $scope.showSelected = function(input) {

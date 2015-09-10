@@ -1,0 +1,9 @@
+<accordion-group is-open="status.isOpen[$index]">
+    <accordion-heading>
+        <div>
+            <i class="fa fa-{{when.groupIcon}}"></i> {{when.groupTitle}}
+            <i class="fa fa-{{when.valueIcon}}"></i> {{showSelected(when.defaultValue)}}
+            <i class="pull-right fa chevron-icon" ng-class="{'fa-chevron-down': status.isOpen[$index], 'fa-chevron-right': !status.isOpen[$index]}"></i>
+        </div>
+    </accordion-heading>
+</accordion-group>

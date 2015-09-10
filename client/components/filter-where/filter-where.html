@@ -10,7 +10,7 @@
 <div class="mutliSelect">
             <ul ng-repeat="category in where.categories">
                 <li>
-                    <input type="checkbox" ng-model="where.defaultValue[category.name]"name="group" id="{{category.name}}" ng-change="showSelected(where.defaultValue)"/>&nbsp {{category.name}}
+                    <input type="checkbox" ng-model="where.defaultValue[category.name]"name="group" id="{{category.name}}" ng-change="showSelected(where.defaultValue)"/>&nbsp; {{category.name}}
                 </li>
             </ul>
         </div>

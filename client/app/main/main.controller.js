@@ -72,7 +72,7 @@ angular.module('seekdeerApp')
 						};
 						$scope.today();
 						
-						// min date
+						// min date ***need this so user can't select days past
 						$scope.toggleMin = function() {
 							$scope.minDate = $scope.minDate ? null : new Date();
 						};
@@ -80,8 +80,37 @@ angular.module('seekdeerApp')
 						
 						// max date
 						$scope.maxDate = new Date(2020, 5, 22);
-	
-	
+						
+						// google maps
+						$scope.map = { 
+							center: { latitude: 45, longitude: -73 }, 
+							zoom: 8,
+							options: {
+							    draggable: false,
+							    scrollwheel: false,
+							    disableDefaultUI: true,
+							    mapTypeId: google.maps.MapTypeId.TERRAIN
+							}
+						};
+						
+						$scope.map.markers = [
+						{
+							id : 1,
+							latitude: 43.67023,
+							longitude: -79.38676
+					    },
+					    {
+							id : 2,
+							latitude: 43.67023,
+							longitude: -81.38676
+					    },
+					    {
+							id : 3,
+							latitude: 43.67023,
+							longitude: -80.38676
+					    }
+					    ];
+					
 
         $scope.showSelected = function(input) {
           //console.log(input)

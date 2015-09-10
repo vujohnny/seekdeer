@@ -48,8 +48,6 @@ $medium-margin: 1.2em;
 
 
 // site styles =====================================================================================================
-
-
 #logo {
   
   font-size: 1.7em;
@@ -61,6 +59,11 @@ $medium-margin: 1.2em;
     font-size: 1.5em;
   }
   
+}
+
+// accordion panel styles
+.panel {
+	margin-bottom: 5px !important; // overwrite custom bootstrap styles bc of directives
 }
 
 .panel-title {

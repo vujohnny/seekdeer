@@ -1,9 +1,13 @@
-<accordion-group is-open="status.isOpen[$index]">
+<accordion-group is-open="status.third">
+    
     <accordion-heading>
         <div>
             <i class="fa fa-{{when.groupIcon}}"></i> {{when.groupTitle}}
             <i class="fa fa-{{when.valueIcon}}"></i> {{showSelected(when.defaultValue)}}
-            <i class="pull-right fa chevron-icon" ng-class="{'fa-chevron-down': status.isOpen[$index], 'fa-chevron-right': !status.isOpen[$index]}"></i>
+            <i class="pull-right fa chevron-icon" ng-class="{'fa-chevron-down': status.third, 'fa-chevron-right': !status.third}"></i>
         </div>
     </accordion-heading>
+    
+    <pre>When content here</pre>
+    
 </accordion-group>

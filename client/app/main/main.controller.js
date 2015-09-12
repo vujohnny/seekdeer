@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('seekdeerApp')
-    .controller('MainCtrl', function($scope, $http, socket) {
+    .controller('MainCtrl', function($scope, $http, socket, uiGmapGoogleMapApi) {
         $scope.awesomeThings = [];
 
         $http.get('/api/things').then(function(response) {
@@ -105,7 +105,7 @@ angular.module('seekdeerApp')
 							    mapTypeId: google.maps.MapTypeId.TERRAIN
 							}
 						};
-						
+												
 						$scope.map.markers = [
 						{
 							id : 1,
@@ -123,5 +123,26 @@ angular.module('seekdeerApp')
 							longitude: -80.38676
 					    }
 					    ];
+					    
+					    uiGmapGoogleMapApi.then(function(maps) {
+							var input = document.getElementById('searchTextField');
+							var options = {types: ['(cities)']};
+							var map = $scope.map;
+						
+							var autocomplete = new google.maps.places.Autocomplete(input, options);	
+					    });
+					
+
+        $scope.showSelected = function(input) {
+          //console.log(input)
+          var object=[];
+            for (var o in input) {
+                if (input[o]) {
+                    object.push(o);
+                }
+            }
+            return object;
+        };
+
 
     });

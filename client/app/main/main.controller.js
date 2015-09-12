@@ -63,24 +63,38 @@ angular.module('seekdeerApp')
         $scope.when = {
             groupTitle: 'When',
             groupIcon: 'calendar',
-            defaultValue: 'Today'
+            defaultValue: new Date(),
+            minDate: new Date()-1,
+            maxDate: new Date().setFullYear(new Date().getFullYear()+2),
+            showweeks: false,
+            mode: "month"
         };
+
+        $scope.showSelected = function(input) {
+          //console.log(input)
+          var object=[];
+            for (var o in input) {
+                if (input[o]) {
+                    object.push(o);
+                }
+            }
+            return object;
+        };
+
         
-						// current date
-						$scope.today = function() {
-							$scope.dt = new Date();
-						};
-						$scope.today();
-						
-						// min date ***need this so user can't select days past
-						$scope.toggleMin = function() {
-							$scope.minDate = $scope.minDate ? null : new Date();
-						};
-						$scope.toggleMin();
-						
-						// max date
-						$scope.maxDate = new Date(2020, 5, 22);
-						
+
+        $scope.getCurrentValue=function(){
+             if ($scope.newThing === '') {
+                return;
+            }
+            $http.post('/api/things', {
+                name: $scope.budget.defaultValue +" "+$scope.showSelected($scope.where.defaultValue)+" "+$scope.dt
+            });
+            $scope.newThing = '';
+        };
+
+        // End accordion functions ======================================================
+
 						// google maps
 						$scope.map = { 
 							center: { latitude: 45, longitude: -73 }, 
@@ -110,17 +124,5 @@ angular.module('seekdeerApp')
 							longitude: -80.38676
 					    }
 					    ];
-					
-
-        $scope.showSelected = function(input) {
-          //console.log(input)
-          var object=[];
-            for (var o in input) {
-                if (input[o]) {
-                    object.push(o);
-                }
-            }
-            return object;
-        };
 
     });

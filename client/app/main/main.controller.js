@@ -84,11 +84,10 @@ angular.module('seekdeerApp')
         
 
         $scope.getCurrentValue=function(){
-             if ($scope.newThing === '') {
-                return;
-            }
+            console.log("inside getCurrentValue");
+            console.log("inside getCurrentValue2");
             $http.post('/api/things', {
-                name: $scope.budget.defaultValue +" "+$scope.showSelected($scope.where.defaultValue)+" "+$scope.dt
+                name: $scope.budget.defaultValue +" "+$scope.showSelected($scope.where.defaultValue)+" "+$scope.when.defaultValue
             });
             $scope.newThing = '';
         };

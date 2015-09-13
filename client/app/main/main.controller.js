@@ -108,17 +108,17 @@ angular.module('seekdeerApp')
 								
 		$scope.map.markers = [
 		{
-			id : 1,
+			id : 105304,
 			latitude: 43.67023,
 			longitude: -79.38676
 	    },
 	    {
-			id : 2,
+			id : 117242,
 			latitude: 43.67023,
 			longitude: -81.38676
 	    },
 	    {
-			id : 3,
+			id : 196313,
 			latitude: 43.67023,
 			longitude: -80.38676
 	    }
@@ -130,27 +130,47 @@ angular.module('seekdeerApp')
 			var map = $scope.map;
 		
 			var autocomplete = new google.maps.places.Autocomplete(input, options);	
+			
+			// event handler for autocomplete change
+			google.maps.event.addListener(autocomplete, 'place_changed', function() {
+				var place = autocomplete.getPlace().formatted_address;
+				
+			    // expedia hotel list call
+			    var apiKey = '70303auc6h8hqutunreio3u8pl',
+					cid = '55505',
+					minorRev = '99',
+					locale = 'en_US',
+					curencyCode = 'USD',
+					destinationString = place,
+					arrivalDate = '10/10/2015',
+					departureDate = '10/20/2015',
+					room = '2';
+					
+				$.ajax({
+					type: 'GET',
+					url: 'https://book.api.ean.com/ean-services/rs/hotel/v3/list?locale='+ locale +'&destinationString='+ destinationString +',nv&apiKey='+  apiKey+'&minorRev='+  minorRev+'&departureDate='+ departureDate +'&room='+ room +'&arrivalDate='+ arrivalDate +'&curencyCode='+ curencyCode +'&cid='+ cid +'',
+					async: false,
+					contentType: "application/json",
+					dataType: 'jsonp',
+					
+					success: function(data){
+						console.log(data);
+						$.each(data.HotelListResponse.HotelList.HotelSummary, function(k, v) {
+							console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.latitude);
+						});
+					},
+					
+					error: function(e){
+						console.log(e.message);
+					}
+				});
+						
+				
+			});
+			
 	    });
 	    
-	    // hotel list call, expedia
-		$.ajax({
-			type: 'GET',
-			url: 'https://book.api.ean.com/ean-services/rs/hotel/v3/list?locale=en_US&destinationString=las vegas,nv&apiKey=70303auc6h8hqutunreio3u8pl&minorRev=99&departureDate=10/20/15&room=2&arrivalDate=10/10/2015&curencyCode=USD&cid=55505',
-			async: false,
-			contentType: "application/json",
-			dataType: 'jsonp',
-			
-			success: function(data){
-				console.log(data);
-			},
-			
-			error: function(e){
-				console.log(e.message);
-			}
-		});
 	   	
-			
-
         $scope.showSelected = function(input) {
           //console.log(input)
           var object=[];

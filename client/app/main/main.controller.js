@@ -145,7 +145,9 @@ angular.module('seekdeerApp')
 					arrivalDate = '10/10/2015',
 					departureDate = '10/20/2015',
 					room = '2';
-					
+				
+				$scope.map.markers = [];
+				
 				$.ajax({
 					type: 'GET',
 					url: 'https://book.api.ean.com/ean-services/rs/hotel/v3/list?locale='+ locale +'&destinationString='+ destinationString +',nv&apiKey='+  apiKey+'&minorRev='+  minorRev+'&departureDate='+ departureDate +'&room='+ room +'&arrivalDate='+ arrivalDate +'&curencyCode='+ curencyCode +'&cid='+ cid +'',
@@ -154,10 +156,15 @@ angular.module('seekdeerApp')
 					dataType: 'jsonp',
 					
 					success: function(data){
-						console.log(data);
 						$.each(data.HotelListResponse.HotelList.HotelSummary, function(k, v) {
-							console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.latitude);
+							//console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.longitude);
+							$scope.map.markers.push({
+									id: v.hotelId, 
+									latitude: v.latitude, 
+									longitude: v.longitude
+								});
 						});
+						console.log($scope.map.markers);
 					},
 					
 					error: function(e){

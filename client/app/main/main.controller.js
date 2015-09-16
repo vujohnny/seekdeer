@@ -105,7 +105,7 @@ angular.module('seekdeerApp')
 
         uiGmapGoogleMapApi.then(function(maps) {
 
-            var map = new google.maps.Map(document.getElementById('googlemap'), {
+            var map = new google.maps.Map(document.getElementById('googleMap'), {
                 center: {
                     lat: -33.8688,
                     lng: 151.2195

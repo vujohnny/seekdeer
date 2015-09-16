@@ -93,30 +93,41 @@ angular.module('seekdeerApp')
         // End accordion functions ======================================================
 
 		// google maps
+/*
 		$scope.map = { 
 			center: { latitude: 45, longitude: -73 }, 
-			zoom: 4,
-			options: {
-			    draggable: false,
-			    scrollwheel: false,
-			    disableDefaultUI: true
-			    //mapTypeId: google.maps.MapTypeId.TERRAIN
-			}
+			zoom: 4
 		};
 								
 		$scope.map.markers = [];
+*/
 	    
 	    uiGmapGoogleMapApi.then(function(maps) {
+		    var map = new google.maps.Map(document.getElementById('testmap'), {
+			    center: {lat: -33.8688, lng: 151.2195},
+			    zoom: 13
+			  });
+			  
+			  var marker = new google.maps.Marker({
+			    map: map,
+			    anchorPoint: new google.maps.Point(0, -29)
+			  });
+		    
+		    
 			var input = document.getElementById('searchTextField');
 			var options = {types: ['(cities)']};
+/*
 			var map = $scope.map;
-		
+			var marker = $scope.map.markers;
+*/
+			
 			var autocomplete = new google.maps.places.Autocomplete(input, options);	
 			
 			// event handler for autocomplete change
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
-				var place = autocomplete.getPlace().formatted_address;
+				var place = autocomplete.getPlace();
 				
+/*
 			    // expedia hotel list call
 			    var apiKey = '70303auc6h8hqutunreio3u8pl',
 					cid = '55505',
@@ -146,13 +157,28 @@ angular.module('seekdeerApp')
 								});
 						});
 						console.log($scope.map.markers);
-						google.maps.event.trigger($scope.map, 'resize');
+					
 					},
 					
 					error: function(e){
 						console.log(e.message);
 					}
 				});
+*/
+				
+				
+				if (place.geometry.viewport) {
+			      map.fitBounds(place.geometry.viewport);
+			      console.log('lily');
+			    } else {
+			      map.setCenter(place.geometry.location);
+			      map.setZoom(17);  // Why 17? Because it looks good.
+			      console.log('loser');
+			    }
+				
+
+				
+				
 						
 				
 			});

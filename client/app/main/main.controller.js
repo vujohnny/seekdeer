@@ -154,13 +154,16 @@ angular.module('seekdeerApp')
                         $.each(data.HotelListResponse.HotelList.HotelSummary, function(k, v) {
                             locations.push([v.name+", rating: "+v.tripAdvisorRating+" stars", v.latitude, v.longitude]);
                         });
+                        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                        var labelIndex = 0;
                         var infowindow = new google.maps.InfoWindow();
                         var marker, i;
                         var markers = new Array();
                         for (i = 0; i < locations.length; i++) {
                             marker = new google.maps.Marker({
                                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                map: map
+                                map: map,
+                                label: labels[labelIndex++ % labels.length]
                             });
                             markers.push(marker);
                             google.maps.event.addListener(marker, 'click', (function(marker, i) {

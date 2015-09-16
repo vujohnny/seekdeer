@@ -93,41 +93,34 @@ angular.module('seekdeerApp')
         // End accordion functions ======================================================
 
 		// google maps
-/*
-		$scope.map = { 
-			center: { latitude: 45, longitude: -73 }, 
-			zoom: 4
-		};
-								
-		$scope.map.markers = [];
-*/
-	    
 	    uiGmapGoogleMapApi.then(function(maps) {
-		    var map = new google.maps.Map(document.getElementById('testmap'), {
+		    
+		    // init google maps and set options
+		    var map;
+		    var bounds = new google.maps.LatLngBounds();
+		    var mapOptions = {
 			    center: {lat: -33.8688, lng: 151.2195},
-			    zoom: 13
-			  });
-			  
-			  var marker = new google.maps.Marker({
-			    map: map,
-			    anchorPoint: new google.maps.Point(0, -29)
-			  });
+			    zoom: 4,
+		        mapTypeId: 'roadmap'
+		    };
+
+		                    
+		    // Display a map on the page
+		    map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);		    		
+			
 		    
-		    
+		    // set autocomplete on input field
 			var input = document.getElementById('searchTextField');
 			var options = {types: ['(cities)']};
-/*
-			var map = $scope.map;
-			var marker = $scope.map.markers;
-*/
 			
 			var autocomplete = new google.maps.places.Autocomplete(input, options);	
 			
 			// event handler for autocomplete change
 			google.maps.event.addListener(autocomplete, 'place_changed', function() {
-				var place = autocomplete.getPlace();
 				
-/*
+				var place = autocomplete.getPlace().formatted_address;
+				//formatted_address
+				
 			    // expedia hotel list call
 			    var apiKey = '70303auc6h8hqutunreio3u8pl',
 					cid = '55505',
@@ -147,9 +140,10 @@ angular.module('seekdeerApp')
 					dataType: 'jsonp',
 					
 					success: function(data){
+						console.log(data);
 						$scope.map.markers = [];
 						$.each(data.HotelListResponse.HotelList.HotelSummary, function(k, v) {
-							//console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.longitude);
+							console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.longitude);
 							$scope.map.markers.push({
 									id: v.hotelId, 
 									latitude: v.latitude, 
@@ -164,15 +158,39 @@ angular.module('seekdeerApp')
 						console.log(e.message);
 					}
 				});
-*/
 				
 				
+				// sets single place from autocomplete
 				if (place.geometry.viewport) {
-			      map.fitBounds(place.geometry.viewport);
-			    } else {
-			      map.setCenter(place.geometry.location);
-			      map.setZoom(17);  // Why 17? Because it looks good.
-			    }
+					map.fitBounds(place.geometry.viewport);
+				} 
+				else {
+					map.setCenter(place.geometry.location);
+					map.setZoom(17);
+				}
+				
+				
+				// set multiple markers
+/*
+				var markers = [
+					['London Eye, London', 51.503454, -0.119562],
+					['Palace of Westminster, London', 51.499633, -0.124755]
+				];
+				
+				var infoWindow = new google.maps.InfoWindow(), marker, i;			
+				for( i = 0; i < markers.length; i++ ) {
+				    var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+				    bounds.extend(position);
+				    marker = new google.maps.Marker({
+				        position: position,
+				        map: map,
+				        title: markers[i][0]
+				    });
+				
+				    // Automatically center the map fitting all markers on the screen
+				    map.fitBounds(bounds);
+				}	
+*/
 				
 
 				

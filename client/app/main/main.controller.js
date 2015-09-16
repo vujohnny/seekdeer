@@ -169,11 +169,9 @@ angular.module('seekdeerApp')
 				
 				if (place.geometry.viewport) {
 			      map.fitBounds(place.geometry.viewport);
-			      console.log('lily');
 			    } else {
 			      map.setCenter(place.geometry.location);
 			      map.setZoom(17);  // Why 17? Because it looks good.
-			      console.log('loser');
 			    }
 				
 

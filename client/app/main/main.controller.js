@@ -81,8 +81,6 @@ angular.module('seekdeerApp')
             return object;
         };
 
-        
-
         $scope.getCurrentValue=function(){
             console.log("inside getCurrentValue");
             console.log("inside getCurrentValue2");
@@ -97,32 +95,16 @@ angular.module('seekdeerApp')
 		// google maps
 		$scope.map = { 
 			center: { latitude: 45, longitude: -73 }, 
-			zoom: 8,
+			zoom: 4,
 			options: {
 			    draggable: false,
 			    scrollwheel: false,
-			    disableDefaultUI: true,
-			    mapTypeId: google.maps.MapTypeId.TERRAIN
+			    disableDefaultUI: true
+			    //mapTypeId: google.maps.MapTypeId.TERRAIN
 			}
 		};
 								
-		$scope.map.markers = [
-		{
-			id : 105304,
-			latitude: 43.67023,
-			longitude: -79.38676
-	    },
-	    {
-			id : 117242,
-			latitude: 43.67023,
-			longitude: -81.38676
-	    },
-	    {
-			id : 196313,
-			latitude: 43.67023,
-			longitude: -80.38676
-	    }
-	    ];
+		$scope.map.markers = [];
 	    
 	    uiGmapGoogleMapApi.then(function(maps) {
 			var input = document.getElementById('searchTextField');
@@ -146,16 +128,15 @@ angular.module('seekdeerApp')
 					departureDate = '10/20/2015',
 					room = '2';
 				
-				$scope.map.markers = [];
-				
 				$.ajax({
 					type: 'GET',
-					url: 'https://book.api.ean.com/ean-services/rs/hotel/v3/list?locale='+ locale +'&destinationString='+ destinationString +',nv&apiKey='+  apiKey+'&minorRev='+  minorRev+'&departureDate='+ departureDate +'&room='+ room +'&arrivalDate='+ arrivalDate +'&curencyCode='+ curencyCode +'&cid='+ cid +'',
+					url: 'http://api.ean.com/ean-services/rs/hotel/v3/list?locale='+ locale +'&destinationString='+ destinationString +'&apiKey='+  apiKey+'&minorRev='+  minorRev+'&departureDate='+ departureDate +'&room='+ room +'&arrivalDate='+ arrivalDate +'&curencyCode='+ curencyCode +'&cid='+ cid +'',
 					async: false,
 					contentType: "application/json",
 					dataType: 'jsonp',
 					
 					success: function(data){
+						$scope.map.markers = [];
 						$.each(data.HotelListResponse.HotelList.HotelSummary, function(k, v) {
 							//console.log('id: ' + v.hotelId + ' latitude: ' + v.latitude + ' longitude: ' + v.longitude);
 							$scope.map.markers.push({
@@ -165,6 +146,7 @@ angular.module('seekdeerApp')
 								});
 						});
 						console.log($scope.map.markers);
+						google.maps.event.trigger($scope.map, 'resize');
 					},
 					
 					error: function(e){

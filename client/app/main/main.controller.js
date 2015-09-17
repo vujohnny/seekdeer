@@ -110,7 +110,9 @@ angular.module('seekdeerApp')
                     lat: -33.8688,
                     lng: 151.2195
                 },
-                zoom: 13
+                zoom: 15,
+                scrollwheel: false,
+                draggable: false
             });
 
 
